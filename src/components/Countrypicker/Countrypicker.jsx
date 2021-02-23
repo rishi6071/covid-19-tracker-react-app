@@ -10,7 +10,7 @@ const Countrypicker = () => {
 
     return (
         <>
-            <Container className="d-flex justify-content-center pt-2">
+            <Container className="d-flex justify-content-center pt-2 mb-5">
                 <FormControl justify="center" className="mt-4">
                     <InputLabel id="demo-simple-select-label">Choose a Country</InputLabel>
                     <Select

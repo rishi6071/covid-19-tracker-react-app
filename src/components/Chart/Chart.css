@@ -1,0 +1,6 @@
+@charset "utf-8";
+
+.lineChart_width {
+    width: 75% !important;
+    margin-bottom: 30px;
+}

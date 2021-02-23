@@ -4,6 +4,7 @@ import './App.css';
 import Header from './components/Header/Header';
 import Cards from './components/Cards/Cards';
 import Countrypicker from './components/Countrypicker/Countrypicker';
+import Chart from './components/Chart/Chart';
 
 const App = () => {
 
@@ -12,6 +13,7 @@ const App = () => {
       <Header />
       <Cards />
       <Countrypicker />
+      <Chart />
     </>
   );
 }
