@@ -1,9 +1,9 @@
 import React from 'react';
-import './Header.css';
 
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 // import '../../../node_modules/bootstrap/dist/js/bootstrap.bundle';
 
+import './Header.css';
 import logo from '../../images/covid19.png';
 import { Container } from '@material-ui/core';
 

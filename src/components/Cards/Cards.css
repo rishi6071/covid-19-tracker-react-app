@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+.grid_list {
+    max-width: 780px !important;
+}
+
+.infected,
+.recovered,
+.deaths {
+    box-shadow: 0px 0px 10px solid grey !important;
+}
+
+.infected {
+    border-bottom: 10px solid rgba(0, 0, 255, 0.5);
+}
+
+.recovered {
+    border-bottom: 10px solid rgba(0, 255, 0, 0.5);
+}
+
+.deaths {
+    border-bottom: 10px solid rgba(255, 0, 0, 0.5);
+}
+
+.cases_content {
+    padding: 30px 25px !important;
+}
