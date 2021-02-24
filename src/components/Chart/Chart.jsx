@@ -51,7 +51,7 @@ const Chart = () => {
 
                 <div className="my-5 py-1"></div>
 
-                <Line data={dataLineChart} />
+                {/* <Line data={dataLineChart} /> */}
             </Container>
         </>
     );
