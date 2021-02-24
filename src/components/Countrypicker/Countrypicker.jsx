@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 import './Countrypicker.css';
 import { Container, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import { url, fetchCountries } from '../../api/Api';
 
 const Countrypicker = () => {
+    // Countries List [useState Array for Countries Name List]
+    const [countries, setCountries] = useState([]);
 
+    // Current Country
+    const [country, setCountry] = useState("global");
+
+    useEffect(() => {
+        async function getCountries() {
+            const countryList = await fetchCountries();
+            setCountries(countryList.countries);
+        }
+
+        getCountries();
+    });
+   
     return (
         <>
             <Container className="d-flex justify-content-center pt-2 mb-5">
@@ -16,19 +31,19 @@ const Countrypicker = () => {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         className="country_select"
-                    // value={}
-                    // onChange={handleChange}
+                        value={country}
+                        onChange={(event) => {
+                            setCountry(event.target.value);
+                        }}
                     >
-                        <MenuItem value={10}>Global</MenuItem>
-                        <MenuItem value={20}>India</MenuItem>
-                        <MenuItem value={30}>Australia</MenuItem>
-                        <MenuItem value={40}>Austria</MenuItem>
-                        <MenuItem value={50}>London</MenuItem>
-                        <MenuItem value={60}>USA</MenuItem>
-                        <MenuItem value={70}>Norway</MenuItem>
-                        <MenuItem value={80}>Finland</MenuItem>
-                        <MenuItem value={90}>England</MenuItem>
-                        <MenuItem value={100}>Bhutan</MenuItem>
+                        <MenuItem value={"global"}>Global</MenuItem>
+                        {
+                            countries.map((country, index, list) => {
+                                return (
+                                    <MenuItem value={country.iso3}>{country.name}</MenuItem>
+                                );
+                            })
+                        }
                     </Select>
                 </FormControl>
             </Container>
