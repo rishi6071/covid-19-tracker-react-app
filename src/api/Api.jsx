@@ -1,29 +1,18 @@
-import React from 'react';
 import axios from 'axios';
 
 const url = `https://covid19.mathdro.id/api/`;
 
 // Fetching [infected, recovered, deaths] Count for Cards
 async function fetchData(country = 'Global') {
-    if (country == 'Global') {
-        try {
-            const covidData = await axios.get(url);
+    let covidData;
 
-            return {
-                data: {
-                    confirmed: covidData.data.confirmed.value,
-                    recovered: covidData.data.recovered.value,
-                    deaths: covidData.data.deaths.value,
-                    lastUpdate: covidData.data.lastUpdate
-                }
-            };
+    try {
+        if (country == 'Global') {
+            covidData = await axios.get(url);
         }
-        catch (error) {
-            return error;
+        else {
+            covidData = await axios.get(`${url}countries/${country}`);
         }
-    }
-    else {
-        const covidData = await axios.get(`${url}countries/${country}`);
 
         return {
             data: {
@@ -33,6 +22,9 @@ async function fetchData(country = 'Global') {
                 lastUpdate: covidData.data.lastUpdate
             }
         };
+    }
+    catch (error) {
+        return error;
     }
 }
 
@@ -47,5 +39,16 @@ async function fetchCountries() {
     }
 }
 
+// Fetching Daily Data
+async function fetchDailyData() {
+    try {
+        const dailyData = await axios.get(`${url}daily`);
+        return dailyData.data;
+    }
+    catch (error) {
+        return error;
+    }
+}
+
 export default fetchData;
-export { url, fetchCountries, fetchData };
+export { url, fetchCountries, fetchData, fetchDailyData };

@@ -4,9 +4,10 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 import './Countrypicker.css';
 import { Container, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
-import { url, fetchCountries, fetchCountryData } from '../../api/Api';
+import { url, fetchCountries } from '../../api/Api';
 
 // Creating Context for Country to export whereever we want
+// It's not using Just for Concept {used localStorage as an Alternative}
 const CountryName = createContext();
 
 const Countrypicker = () => {
@@ -30,7 +31,7 @@ const Countrypicker = () => {
         <>
             <CountryName.Provider value={country}>
                 <Container className="d-flex justify-content-center pt-2 mb-5">
-                    <FormControl justify="center" className="mt-4">
+                    <FormControl justify="center" className="mt-5">
                         <InputLabel id="demo-simple-select-label">Choose a Country</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
@@ -46,7 +47,7 @@ const Countrypicker = () => {
                             {
                                 countries.map((country, index, list) => {
                                     return (
-                                        <MenuItem value={country.name}>{country.name}</MenuItem>
+                                        <MenuItem key={index} value={country.name}>{country.name}</MenuItem>
                                     );
                                 })
                             }

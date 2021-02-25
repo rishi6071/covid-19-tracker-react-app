@@ -3,3 +3,10 @@
 .country_select {
     width: 320px !important;
 }
+
+@media screen and (max-width: 576px) {
+    .country_select {
+        margin-top: 20px !important;
+        width: 250px !important;
+    }
+}
