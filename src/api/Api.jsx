@@ -3,29 +3,48 @@ import axios from 'axios';
 
 const url = `https://covid19.mathdro.id/api/`;
 
-// Fetching [infected, recovered, deaths] Count
-async function fetchData() {
-    const covidData = await axios.get(url);
+// Fetching [infected, recovered, deaths] Count for Cards
+async function fetchData(country = 'Global') {
+    if (country == 'Global') {
+        try {
+            const covidData = await axios.get(url);
 
-    return {
-        data: {
-            confirmed: covidData.data.confirmed.value,
-            recovered: covidData.data.recovered.value,
-            deaths: covidData.data.deaths.value,
-            lastUpdate: covidData.data.lastUpdate
+            return {
+                data: {
+                    confirmed: covidData.data.confirmed.value,
+                    recovered: covidData.data.recovered.value,
+                    deaths: covidData.data.deaths.value,
+                    lastUpdate: covidData.data.lastUpdate
+                }
+            };
         }
-    };
+        catch (error) {
+            return error;
+        }
+    }
+    else {
+        const covidData = await axios.get(`${url}countries/${country}`);
+
+        return {
+            data: {
+                confirmed: covidData.data.confirmed.value,
+                recovered: covidData.data.recovered.value,
+                deaths: covidData.data.deaths.value,
+                lastUpdate: covidData.data.lastUpdate
+            }
+        };
+    }
 }
 
-// Fetching Countries Names
+// Fetching Countries Names for CountryPicker
 async function fetchCountries() {
-    const countryList = await axios.get(`${url}countries`);
-
-    return countryList.data;
-}
-
-// Fetching Particular Country Data
-async function fetchCountryData() {
+    try {
+        const countryList = await axios.get(`${url}countries/`);
+        return countryList.data;
+    }
+    catch (error) {
+        return error;
+    }
 }
 
 export default fetchData;

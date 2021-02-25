@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
@@ -6,8 +6,12 @@ import './Cards.css';
 import CountUp from 'react-countup';
 import { Container, Grid, Paper, CardContent, Typography } from '@material-ui/core';
 import { url, fetchData } from '../../api/Api';
+import Countrypicker, { CountryName } from '../Countrypicker/Countrypicker';
 
 const Cards = () => {
+    // Current Country
+    const countryName = useContext(CountryName);
+
     // useState for [confirmed, recovered, deaths] & lastUpdate
     const [covidData, setCovidData] = useState({
         confirmed: 0,
@@ -18,7 +22,7 @@ const Cards = () => {
 
     useEffect(() => {
         async function getCount() {
-            const covidData = await fetchData();
+            const covidData = await fetchData(localStorage.getItem("countryName"));
             setCovidData(covidData.data);
         }
 
@@ -40,7 +44,7 @@ const Cards = () => {
                             <CardContent className="cases_content">
                                 <Typography gutterBottom>Infected</Typography>
                                 <Typography variant="h5" component="h2">
-                                    <CountUp start={0} end={covidData.confirmed} duration={2.5} separator="," useEasing={true} />
+                                    <CountUp start={0} end={covidData.confirmed} duration={2} separator="," useEasing={true} />
                                 </Typography>
                                 <Typography color="textSecondary">{lastUpdated()}</Typography>
                                 <Typography className="pt-1" variant="body2" component="p">Number of Active cases of Covid-19.</Typography>
@@ -53,7 +57,7 @@ const Cards = () => {
                             <CardContent className="cases_content">
                                 <Typography gutterBottom>Recovered</Typography>
                                 <Typography variant="h5" component="h2">
-                                    <CountUp start={0} end={covidData.recovered} duration={2.5} separator="," useEasing={true} />
+                                    <CountUp start={0} end={covidData.recovered} duration={2} separator="," useEasing={true} />
                                 </Typography>
                                 <Typography color="textSecondary">{lastUpdated()}</Typography>
                                 <Typography className="pt-1" variant="body2" component="p">Number of Recovered cases from Covid-19.</Typography>
@@ -66,7 +70,7 @@ const Cards = () => {
                             <CardContent className="cases_content">
                                 <Typography gutterBottom>Deaths</Typography>
                                 <Typography variant="h5" component="h2">
-                                    <CountUp start={0} end={covidData.deaths} duration={2.5} separator="," useEasing={true} />
+                                    <CountUp start={0} end={covidData.deaths} duration={2} separator="," useEasing={true} />
                                 </Typography>
                                 <Typography color="textSecondary">{lastUpdated()}</Typography>
                                 <Typography className="pt-1" variant="body2" component="p">Number of Deaths due to Covid-19.</Typography>
