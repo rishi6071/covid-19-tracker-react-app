@@ -32,26 +32,25 @@ const Countrypicker = () => {
             <CountryName.Provider value={country}>
                 <Container className="d-flex justify-content-center pt-2 mb-5">
                     <FormControl justify="center" className="mt-5">
-                        <InputLabel id="demo-simple-select-label">Choose a Country</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
+                        <label for="demo-simple-select" className="country_label">Choose a Country*</label>
+                        <select
                             id="demo-simple-select"
-                            className="country_select"
+                            className="country_select custom-select"
                             value={country}
                             onChange={(event) => {
                                 setCountry(event.target.value);
                                 localStorage.setItem('countryName', event.target.value);
                             }}
                         >
-                            <MenuItem value={"Global"}>Global</MenuItem>
+                            <option value={"Global"}>Global</option>
                             {
                                 countries.map((country, index, list) => {
                                     return (
-                                        <MenuItem key={index} value={country.name}>{country.name}</MenuItem>
+                                        <option key={index} value={country.name}>{country.name}</option>
                                     );
                                 })
                             }
-                        </Select>
+                        </select>
                     </FormControl>
                 </Container>
             </CountryName.Provider>

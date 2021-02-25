@@ -1,7 +1,24 @@
 @charset "utf-8";
 
+.country_label {
+    font-size: small !important;
+    letter-spacing: 0.8px;
+    color: grey;
+    margin-bottom: 4px !important;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 .country_select {
     width: 320px !important;
+    border: none;
+    border-bottom: 1.5px solid darkslategray;
+    background-color: transparent;
+    border-radius: 0px;
+}
+
+.country_select:focus {
+    box-shadow: none !important;
+    border-bottom: 2.5px solid darkslategray;
 }
 
 @media screen and (max-width: 576px) {
