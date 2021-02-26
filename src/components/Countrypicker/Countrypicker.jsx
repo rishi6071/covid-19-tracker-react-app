@@ -5,12 +5,16 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './Countrypicker.css';
 import { Container, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { url, fetchCountries } from '../../api/Api';
+import Loader from '../Loader/Loader';
 
 // Creating Context for Country to export whereever we want
 // It's not using Just for Concept {used localStorage as an Alternative}
 const CountryName = createContext();
 
 const Countrypicker = () => {
+    // Loading Confirmation
+    const [loadConfirmation, setLoadConfirmation] = useState(false);
+
     // Countries List [useState Array for Countries Name List]
     const [countries, setCountries] = useState([]);
 
@@ -21,12 +25,18 @@ const Countrypicker = () => {
     useEffect(() => {
         async function getCountries() {
             const countryList = await fetchCountries();
+            setLoadConfirmation(true);
             setCountries(countryList.countries);
         }
 
         getCountries();
     });
 
+    // Checking Loading Confirmation otherwise Loader will be shown
+    if(!loadConfirmation) {
+        return <Loader colorClass="warning" />;
+    }
+    
     return (
         <>
             <CountryName.Provider value={country}>

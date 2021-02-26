@@ -8,8 +8,12 @@ import { Line, Bar } from 'react-chartjs-2';
 import { url, fetchCountryData } from '../../api/Api';
 import { fetchData, fetchDailyData } from '../../api/Api';
 import { CountryName } from '../Countrypicker/Countrypicker';
+import Loader from '../Loader/Loader';
 
 const Chart = () => {
+    // Loading Confirmation
+    const [loadConfirmation, setLoadConfirmation] = useState(false);
+
     // Current Country
     const countryName = useContext(CountryName);
 
@@ -23,6 +27,7 @@ const Chart = () => {
     useEffect(() => {
         async function getCovidData() {
             const getCovidData = await fetchData(localStorage.getItem("countryName"));
+            setLoadConfirmation(true);
             setCovidCount(getCovidData.data);
         }
 
@@ -69,6 +74,11 @@ const Chart = () => {
                 data: [covidCount.confirmed, covidCount.recovered, covidCount.deaths],
             }
         ]
+    }
+
+    // Checking load confirmation otherwise Loader will be shown
+    if(!loadConfirmation) {
+        return <Loader colorClass="danger" />;
     }
 
     return (

@@ -1,9 +1,5 @@
 @charset "utf-8";
 
-.grid_list {
-    max-width: 780px !important;
-}
-
 .infected,
 .recovered,
 .deaths {

@@ -7,8 +7,12 @@ import CountUp from 'react-countup';
 import { Container, Grid, Paper, CardContent, Typography } from '@material-ui/core';
 import { url, fetchData } from '../../api/Api';
 import Countrypicker, { CountryName } from '../Countrypicker/Countrypicker';
+import Loader from '../Loader/Loader';
 
 const Cards = () => {
+    // Loading Confirmation
+    const [loadConfirmation, setLoadConfirmation] = useState(false);
+
     // Current Country
     const countryName = useContext(CountryName);
 
@@ -23,6 +27,7 @@ const Cards = () => {
     useEffect(() => {
         async function getCount() {
             const covidData = await fetchData(localStorage.getItem("countryName"));
+            setLoadConfirmation(true);
             setCovidData(covidData.data);
         }
 
@@ -35,11 +40,16 @@ const Cards = () => {
         return date.toDateString();
     }
 
+    // Checking Confirmation otherwise Loader will be shown
+    if (!loadConfirmation) {
+        return <Loader colorClass="info" />;
+    }
+
     return (
         <>
-            <Container className="grid_list">
+            <Container>
                 <Grid container spacing={5} justify="center">
-                    <Grid item sm>
+                    <Grid item xs={10} md={3}>
                         <Paper className="infected">
                             <CardContent className="cases_content">
                                 <Typography gutterBottom>Infected</Typography>
@@ -52,7 +62,7 @@ const Cards = () => {
                         </Paper>
                     </Grid>
 
-                    <Grid item sm>
+                    <Grid item xs={10} md={3}>
                         <Paper className="recovered">
                             <CardContent className="cases_content">
                                 <Typography gutterBottom>Recovered</Typography>
@@ -65,7 +75,7 @@ const Cards = () => {
                         </Paper>
                     </Grid>
 
-                    <Grid item sm>
+                    <Grid item xs={10} md={3}>
                         <Paper className="deaths">
                             <CardContent className="cases_content">
                                 <Typography gutterBottom>Deaths</Typography>
