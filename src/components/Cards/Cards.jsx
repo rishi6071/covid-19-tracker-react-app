@@ -40,7 +40,7 @@ const Cards = () => {
         return date.toDateString();
     }
 
-    // Checking Confirmation otherwise Loader will be shown
+    // Checking load Confirmation otherwise Loader will be shown
     if (!loadConfirmation) {
         return <Loader colorClass="info" />;
     }
