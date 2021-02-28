@@ -26,11 +26,11 @@ const Countrypicker = () => {
         async function getCountries() {
             const countryList = await fetchCountries();
             setLoadConfirmation(true);
-            setCountries(countryList.countries);
+              setCountries(countryList.countries);
         }
 
         getCountries();
-    });
+    }, [country]);
 
     // Checking Loading Confirmation otherwise Loader will be shown
     if(!loadConfirmation) {

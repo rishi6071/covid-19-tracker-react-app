@@ -28,11 +28,11 @@ const Cards = () => {
         async function getCount() {
             const covidData = await fetchData(localStorage.getItem("countryName"));
             setLoadConfirmation(true);
-            setCovidData(covidData.data);
+            await setCovidData(covidData.data);
         }
 
         getCount();
-    });
+    }, []);
 
     // Last Updated Data's Date & Day
     const lastUpdated = () => {
