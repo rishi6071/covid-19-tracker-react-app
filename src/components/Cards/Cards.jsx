@@ -32,7 +32,7 @@ const Cards = () => {
         }
 
         getCount();
-    }, []);
+    });
 
     // Last Updated Data's Date & Day
     const lastUpdated = () => {
