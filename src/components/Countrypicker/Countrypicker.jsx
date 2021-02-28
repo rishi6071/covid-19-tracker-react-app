@@ -30,7 +30,7 @@ const Countrypicker = () => {
         }
 
         getCountries();
-    }, [country]);
+    });
 
     // Checking Loading Confirmation otherwise Loader will be shown
     if(!loadConfirmation) {
