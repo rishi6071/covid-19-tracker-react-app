@@ -1,27 +1,23 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 import './Chart.css';
 import { Container } from '@material-ui/core';
-import { Line, Bar } from 'react-chartjs-2';
-import { url, fetchCountryData } from '../../api/Api';
-import { fetchData, fetchDailyData } from '../../api/Api';
-import { CountryName } from '../Countrypicker/Countrypicker';
+import { Bar } from 'react-chartjs-2';
+import { fetchData } from '../../api/Api';
+// import { CountryName } from '../Countrypicker/Countrypicker';
 import Loader from '../Loader/Loader';
 
 const Chart = () => {
     // Loading Confirmation
     const [loadConfirmation, setLoadConfirmation] = useState(false);
 
-    // Current Country
-    const countryName = useContext(CountryName);
-
     // useState Object for [confirmed, recovered, deaths] Count & last update
     const [covidCount, setCovidCount] = useState({});
 
     // useState dailyData Object
-    const [dailyData, setDailyData] = useState([]);
+    // const [dailyData, setDailyData] = useState([]);
 
     // useEffect for Bar
     useEffect(() => {
@@ -45,24 +41,24 @@ const Chart = () => {
     // });
 
     // Data of Line
-    const dataLineChart = {
-        labels: dailyData.map((dateData) => dateData.reportDate),
-        datasets: [
-            {
-                label: "Infected",
-                data: dailyData.map((dateData) => dateData.confirmed.total),
-                fill: true,
-                backgroundColor: "rgba(0, 0, 255, 0.2)",
-                borderColor: "rgba(0, 0, 255, 0.2)"
-            },
-            {
-                label: "Deaths",
-                data: dailyData.map((dateData) => dateData.deaths.total),
-                fill: false,
-                borderColor: "rgba(255, 0, 0, 0.4)"
-            }
-        ]
-    };
+    // const dataLineChart = {
+    //     labels: dailyData.map((dateData) => dateData.reportDate),
+    //     datasets: [
+    //         {
+    //             label: "Infected",
+    //             data: dailyData.map((dateData) => dateData.confirmed.total),
+    //             fill: true,
+    //             backgroundColor: "rgba(0, 0, 255, 0.2)",
+    //             borderColor: "rgba(0, 0, 255, 0.2)"
+    //         },
+    //         {
+    //             label: "Deaths",
+    //             data: dailyData.map((dateData) => dateData.deaths.total),
+    //             fill: false,
+    //             borderColor: "rgba(255, 0, 0, 0.4)"
+    //         }
+    //     ]
+    // };
 
     // Data of Bar
     const dataBarChart = {

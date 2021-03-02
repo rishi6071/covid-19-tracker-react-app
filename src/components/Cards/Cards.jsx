@@ -1,20 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 import './Cards.css';
 import CountUp from 'react-countup';
 import { Container, Grid, Paper, CardContent, Typography } from '@material-ui/core';
-import { url, fetchData } from '../../api/Api';
-import Countrypicker, { CountryName } from '../Countrypicker/Countrypicker';
+import { fetchData } from '../../api/Api';
 import Loader from '../Loader/Loader';
 
 const Cards = () => {
     // Loading Confirmation
     const [loadConfirmation, setLoadConfirmation] = useState(false);
-
-    // Current Country
-    const countryName = useContext(CountryName);
 
     // useState for [confirmed, recovered, deaths] & lastUpdate
     const [covidData, setCovidData] = useState({

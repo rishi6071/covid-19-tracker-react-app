@@ -3,8 +3,8 @@ import React, { useEffect, useState, createContext } from 'react';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 import './Countrypicker.css';
-import { Container, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
-import { url, fetchCountries } from '../../api/Api';
+import { Container, FormControl } from '@material-ui/core';
+import { fetchCountries } from '../../api/Api';
 import Loader from '../Loader/Loader';
 
 // Creating Context for Country to export whereever we want

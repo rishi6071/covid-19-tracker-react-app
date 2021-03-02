@@ -7,7 +7,7 @@ async function fetchData(country = 'Global') {
     let covidData;
 
     try {
-        if (country == 'Global') {
+        if (country === 'Global') {
             covidData = await axios.get(url);
         }
         else {
