@@ -4,7 +4,7 @@ import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import "./Chart.css";
 import { Container } from "@material-ui/core";
-import { Bar } from "react-chartjs-2";
+import { Bar, Pie } from "react-chartjs-2";
 import { fetchData } from "../../api/Api";
 // import { CountryName } from '../Countrypicker/Countrypicker';
 import Loader from "../Loader/Loader";
@@ -82,6 +82,23 @@ const Chart = () => {
     ],
   };
 
+  // Data of Pie
+  const dataPieChart = {
+    labels: ["Infected", "Recovered", "Deaths"],
+    datasets: [
+      {
+        label: "People",
+        data: [covidCount.confirmed, covidCount.recovered, covidCount.deaths],
+        backgroundColor: [
+          "rgba(153, 102, 255, 0.8)",
+          "rgba(75, 192, 192, 0.8)",
+          "rgba(255, 99, 132, 0.8)",
+        ],
+        hoverOffset: 4,
+      },
+    ],
+  };
+
   // Checking load confirmation otherwise Loader will be shown
   if (!loadConfirmation) {
     return <Loader colorClass="danger" />;
@@ -101,9 +118,12 @@ const Chart = () => {
           }}
         />
 
-        <div className="my-4 py-1"></div>
+        <div className="my-md-4 my-2 py-1"></div>
 
         {/* <Line data={dataLineChart} /> */}
+        <Pie data={dataPieChart} />
+        
+        <div className="mt-4"></div>
       </Container>
     </>
   );
